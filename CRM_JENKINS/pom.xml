@@ -3,22 +3,21 @@
   <groupId>CRM</groupId>
   <artifactId>CRM_JENKINS</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-     <dependencies>
+
+   <dependencies>
    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
-    <version>${selenium-java-version}</version> <!-- to download latest version automatically-->
+    <version>4.25.0</version> <!-- to download latest version automatically-->
 </dependency>
-
-<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
 <dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi-ooxml</artifactId>
-    <version>4.1.2</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+  <dependency>
     <groupId>org.apache.poi</groupId>
     <artifactId>poi</artifactId>
     <version>4.1.2</version>
@@ -35,40 +34,55 @@
     <artifactId>testng</artifactId>
     <version>7.10.2</version>
 </dependency>
-     	
-     </dependencies>
+</dependencies>
  <properties>
-  <selenium-java-version>LATEST</selenium-java-version>
   <maven.compiler.target>1.8</maven.compiler.target>
   <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
   
 	<profiles>
-
-
-	<profile>
-	<id>RRT</id>
-	<build>
-		
-		<plugins>
-			<!-- Below plug-in is used to execute tests -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<suiteXmlFiles>
-						<!-- TestNG suite XML files -->
-						<suiteXmlFile>Regional_Regression_Suite.xml</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-			</plugin>
-			
-			
-		</plugins>
-	</build>
-	</profile>
-	
-		
-	</profiles>
+ <profile>
+ <id>ST</id>
+  <build>
+  	<plugins>
+       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>SmokeSuite.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+    
+	</plugins>
+ </build> 
+ 
+  </profile>
+ 
+ <profile>
+ <id>RT</id>
+ 
+ <build>
+  	<plugins>
+       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>RegressionSuite.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+    
+	</plugins>
+ </build> 
+ 
+ 
+ </profile>
+ 
+ 
+ </profiles>
 </project>
